@@ -1,0 +1,58 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    def dep = rootProject.ext.dependencies
+    def testDep = rootProject.ext.testDependencies
+
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    //Retrofit
+    api dep["retrofit2"]
+    //Gson converter
+    api dep["converter-gson"]
+    //Okhttp
+    api dep["okhttp3"]
+    //Okhttp logging
+    api dep["okhttp3-logging"]
+    //RxJava　adapter
+    api dep["retrofit2-rxjava2-adapter"]
+    // rxandroid
+    api dep["rxAndroid"]
+    // livedata support
+    // ViewModel and LiveData
+    api dep["lifecycle"]
+
+    // 分包使用
+    api dep["support-multidex"]
+
+    // okhttp 调用build的时候日志有个warning提示
+    // 参考地址https://blog.csdn.net/irizhao/article/details/103643788
+    api dep["conscrypt-android"]
+
+}

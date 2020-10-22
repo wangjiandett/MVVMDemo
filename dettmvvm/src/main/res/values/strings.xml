@@ -1,0 +1,14 @@
+<resources>
+
+    <!--网络异常-->
+    <string name="tt_error_net">网络错误%1$d</string>
+    <string name="tt_error_parse">数据异常，解析错误</string>
+    <string name="tt_error_connect">网络连接失败</string>
+    <string name="tt_error_ssl">证书验证失败</string>
+    <string name="tt_error_data_error">数据异常</string>
+    <string name="tt_error_unknow">未知错误</string>
+
+    <string name="tt_loading">加载中…</string>
+    <string name="tt_share">分享</string>
+
+</resources>

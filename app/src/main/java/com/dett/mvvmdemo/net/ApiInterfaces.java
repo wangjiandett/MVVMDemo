@@ -1,6 +1,5 @@
 package com.dett.mvvmdemo.net;
 
-import com.dett.dettmvvm.mvvm.BaseResponse;
 import com.dett.mvvmdemo.bean.GetResponse;
 import com.dett.mvvmdemo.bean.PostRequest;
 import com.dett.mvvmdemo.bean.PostResponse;

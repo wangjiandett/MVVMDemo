@@ -1,8 +1,5 @@
 package com.dett.mvvmdemo.net;
 
-import android.text.TextUtils;
-
-
 import com.dett.dettmvvm.mvvm.ApiService;
 import com.dett.dettmvvm.mvvm.ProgressResultListener;
 import com.dett.dettmvvm.mvvm.interceptor.DownloadInterceptor;
@@ -22,6 +19,11 @@ public class ApiCreator {
      * base url
      */
     private static final String BASE_URL = "https://www.wanandroid.com/";//"https://travel.shylh1d3.com/wxApi/";
+
+    /**
+     * 响应成功code
+     */
+    public static final int SUCCESS_CODE = 0;
 
     /**
      * 添加共用header信息，header需要在ApiService前面初始化，否则无法加载mHeadersInterceptor

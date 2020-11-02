@@ -33,10 +33,6 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class BaseModel<Resp, Data> {
 
-    /**
-     * 请求成功 code
-     */
-    private int mSuccessCode = 1;
     private Disposable mDisposable;
     protected ValueCallback<Data> mCallback;
     /**
@@ -48,17 +44,6 @@ public class BaseModel<Resp, Data> {
     public BaseModel() {
         dataMutableLiveData = new MutableLiveData<>();
         responseData = new ResponseData<Data>();
-    }
-
-    public void setSuccessCode(int mSuccessCode) {
-        this.mSuccessCode = mSuccessCode;
-    }
-
-    /**
-     * 获取请求成功响应码
-     */
-    protected int getSuccessCode() {
-        return mSuccessCode;
     }
 
     public MutableLiveData<ResponseData<Data>> request(Observable<Resp> observable) {
@@ -76,7 +61,7 @@ public class BaseModel<Resp, Data> {
 
         observable.subscribeOn(Schedulers.io())// io线程中执行请求
                 .observeOn(AndroidSchedulers.mainThread())// 主线程中执行监听
-                .map(new ResultFilter(getSuccessCode()))// 处理响应结果
+                .map(new ResultFilter())// 处理响应结果
                 .subscribe(new Observer<Data>() {
 
                     @Override
@@ -127,20 +112,13 @@ public class BaseModel<Resp, Data> {
      */
     private class ResultFilter implements Function<Resp, Data> {
 
-        private int SUCCESS_CODE;
-
-        public ResultFilter(int SUCCESS_CODE) {
-            this.SUCCESS_CODE = SUCCESS_CODE;
-        }
-
         @Override
         public Data apply(Resp baseResponse) {
-            // when status equals success code
-            if (baseResponse instanceof BaseResponse) {
-                BaseResponse<Data> response = (BaseResponse<Data>) baseResponse;
-                if (response.code == SUCCESS_CODE) {
+            if (baseResponse instanceof IBaseResponse) {
+                IBaseResponse<Data> response = (IBaseResponse<Data>) baseResponse;
+                if (response.isSuccess()) {
                     // 请求成功，但是返回结果为空的情况
-                    if (response.data == null) {
+                    if (response.getData() == null) {
                         // 获取data实例
                         Data data = getDataInstance();
                         if (data == null) {
@@ -149,11 +127,11 @@ public class BaseModel<Resp, Data> {
                         }
                         return data;
                     }
-                    return (Data) response.data;
+                    return (Data) response.getData();
                 } else {
                     // throw data error exception
                     // 服务器自定义异常
-                    throw new ServerException(response.code, response.msg);
+                    throw new ServerException(response.getCode(), response.getMsg());
                 }
             } else {
                 return getResponse(baseResponse);

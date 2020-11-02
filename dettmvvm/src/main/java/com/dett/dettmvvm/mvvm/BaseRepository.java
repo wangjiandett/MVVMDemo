@@ -9,7 +9,7 @@ import io.reactivex.Observable;
  * <p>
  * Created by：wangjian on 2018/8/21 15:11
  */
-public class BaseRepository {
+public abstract class BaseRepository {
 
     protected <Response, Data> MutableLiveData<ResponseData<Data>> request(Observable<Response> observable) {
         return request(null, observable);
@@ -20,27 +20,8 @@ public class BaseRepository {
         return baseMode.request(requestParams, observable);
     }
 
-    protected <Data> MutableLiveData<ResponseData<Data>> requestBR(Observable<BaseResponse<Data>> observable) {
-        return requestBR(null, observable);
-    }
-
-    protected <Data> MutableLiveData<ResponseData<Data>> requestBR(Object requestParams, Observable<BaseResponse<Data>> observable) {
-        BaseResponseModel<Data> baseMode = getBaseResponseModel();
-        return baseMode.request(requestParams, observable);
-    }
-
-    /**
-     * 获取
-     *
-     * @param <Response>
-     * @param <Data>
-     * @return
-     */
     protected <Response, Data> BaseModel<Response, Data> getBaseModel() {
         return new BaseModel<Response, Data>();
     }
 
-    protected <Data> BaseResponseModel<Data> getBaseResponseModel() {
-        return new BaseResponseModel<Data>();
-    }
 }

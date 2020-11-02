@@ -20,10 +20,6 @@ public class SwipeModel extends BaseViewModel<SwipeRepository> {
         return mRepository.getBanners(type);
     }
 
-    public void cancelBanners(){
-        mRepository.cancelBanners();
-    }
-
     public MutableLiveData<ResponseData<List<GetResponse>>> getBanners2(String type) {
         return mRepository.getBanners2(type);
     }

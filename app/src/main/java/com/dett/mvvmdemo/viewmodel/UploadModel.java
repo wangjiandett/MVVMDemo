@@ -1,6 +1,6 @@
 package com.dett.mvvmdemo.viewmodel;
 
-import com.dett.dettmvvm.mvvm.BaseResponse;
+import com.dett.mvvmdemo.net.BaseResponse;
 import com.dett.dettmvvm.mvvm.BaseUploadFileModel;
 import com.dett.dettmvvm.mvvm.ValueCallback;
 import com.dett.mvvmdemo.bean.UploadResp;

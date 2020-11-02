@@ -6,14 +6,14 @@ package com.dett.dettmvvm.mvvm;
  * @author wangjian
  * Created on 2020/11/2 14:24
  */
-public abstract class IBaseResponse<T> {
+public interface IBaseResponse<T> {
 
-    public abstract int getCode();
+    int getCode();
 
-    public abstract String getMsg();
+    String getMsg();
 
-    public abstract T getData();
+    T getData();
 
-    public abstract boolean isSuccess();
+    boolean isSuccess();
 
 }

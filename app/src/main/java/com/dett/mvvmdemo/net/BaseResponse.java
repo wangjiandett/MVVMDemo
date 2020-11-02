@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
  * <p>
  * Created by：wangjian on 2017/12/20 16:12
  */
-public class BaseResponse<T> extends IBaseResponse<T> {
+public class BaseResponse<T> implements IBaseResponse<T> {
 
     public T data;
     @SerializedName("errorCode")

@@ -27,9 +27,10 @@ public interface ValueCallback<T> extends ProgressResultListener {
     /**
      * 响应失败回调
      *
+     * @param code 错误码
      * @param msg 失败提示
      */
-    void onFail(String msg);
+    void onFail(int code, String msg);
 
     /**
      * 取消请求回调

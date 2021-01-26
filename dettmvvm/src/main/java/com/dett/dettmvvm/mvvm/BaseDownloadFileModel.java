@@ -1,5 +1,7 @@
 package com.dett.dettmvvm.mvvm;
 
+import com.dett.dettmvvm.exception.ExceptionHandle;
+import com.dett.dettmvvm.exception.ResponseException;
 import com.dett.dettmvvm.utils.LogUtils;
 import com.dett.dettmvvm.utils.Utils;
 
@@ -67,7 +69,8 @@ public abstract class BaseDownloadFileModel implements ProgressResultListener {
                     public void onError(Throwable e) {
                         LogUtils.d(e);
                         isDownloading = false;
-                        onFail(e.getMessage());
+                        ResponseException exception = ExceptionHandle.handleException(e);
+                        onFail(exception.code, exception.message);
                     }
 
                     @Override
@@ -116,8 +119,9 @@ public abstract class BaseDownloadFileModel implements ProgressResultListener {
     /**
      * the fail callback
      *
+     * @param msg the fail code
      * @param msg the fail message
      */
-    protected abstract void onFail(String msg);
+    protected abstract void onFail(int code, String msg);
 
 }

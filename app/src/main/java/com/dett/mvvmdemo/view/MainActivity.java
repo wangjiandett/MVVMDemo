@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFail(String msg) {
+            public void onFail(int code, String msg) {
                 showToast(msg);
             }
 

@@ -180,7 +180,7 @@ public class BaseModel<Resp, Data> {
      */
     protected void dealError(Throwable e) {
         ResponseException throwable = ExceptionHandle.handleException(e);
-        onFail(throwable.message);
+        onFail(throwable.code, throwable.message);
     }
 
     /**
@@ -197,10 +197,11 @@ public class BaseModel<Resp, Data> {
     /**
      * the fail callback
      *
+     * @param code the fail code
      * @param msg the fail message
      */
-    protected void onFail(String msg) {
-        responseData.mStatus = LoadState.FAIL.setTipMsg(msg);
+    protected void onFail(int code, String msg) {
+        responseData.mStatus = LoadState.FAIL.setTipMsg(msg).setStatus(code);
         dataMutableLiveData.postValue(responseData);
     }
 

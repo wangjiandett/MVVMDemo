@@ -24,7 +24,7 @@ public abstract class SimpleValueCallback<T> implements ValueCallback<T> {
 //    }
     
 //    @Override
-//    public void onFail(String msg) {
+//    public void onFail(int code, String msg) {
 //
 //    }
 
